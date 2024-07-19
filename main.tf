@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "aws" {
-    region = "us-west-2"
+    region = "us-east-2"
 }
 
 variable "flask_port" {
@@ -75,7 +75,7 @@ output "public_ip" {
 }
 
 resource "aws_instance" "flask" {
-    ami = "ami-076fe60835f136dc9"
+    ami = "ami-0862be96e41dcbf74"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
     tags = {
