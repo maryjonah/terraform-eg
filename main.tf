@@ -81,6 +81,17 @@ resource "aws_instance" "flask" {
 
     user_data = <<-EOF
     #!/bin/bash
+    sudo apt update -y
+    cd /home/ubuntu/
+    rm -rf SCA_Devops_Python_Project_Terraform
+    git clone https://github.com/maryjonah/SCA_Devops_Python_Terraform.git
+    cd SCA_Devops_Python_Terraform
+    sudo apt install python3-venv -y
+    sudo apt install python3-pip -y
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    cd src/
     DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.eu"  bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     DD_SERVICE="traces-flask-request-app" DD_ENV="staging-1" DD_LOGS_INJECTION=true ddtrace-run python app.py
     EOF
