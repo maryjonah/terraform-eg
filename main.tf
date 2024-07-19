@@ -92,7 +92,7 @@ resource "aws_instance" "flask" {
     source venv/bin/activate
     pip install -r requirements.txt
     cd src/
-    DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.eu"  bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.eu" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging-1 DD_APM_INSTRUMENTATION_LIBRARIES=python:2.9.2 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     DD_SERVICE="traces-flask-request-app" DD_ENV="staging-1" DD_LOGS_INJECTION=true ddtrace-run python app.py
     EOF
 
