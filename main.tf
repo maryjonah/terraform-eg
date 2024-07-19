@@ -34,7 +34,7 @@ variable "outbound_anywhere" {
 
 # Security Group
 resource "aws_security_group" "flask-terraform-sg" {
-    name = "terraform-example-instance-2"
+    name = "terraform-example-instance-3"
 
     ingress {
         description = "Flask"
@@ -81,7 +81,7 @@ resource "aws_instance" "flask" {
 
     user_data = <<-EOF
     #!/bin/bash
-    DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+    DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.eu"  bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     EOF
 
     user_data_replace_on_change = true
