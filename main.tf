@@ -12,6 +12,26 @@ provider "aws" {
     region = "us-west-2"
 }
 
+variable "flask_port" {
+    type        = number
+    default     = 5000
+}
+
+variable "http_port" {
+    type        = number
+    default     = 80
+}
+
+variable "ssh_port" {
+    type        = number
+    default     = 22
+}
+
+variable "outbound_anywhere" {
+    type = number
+    default = 0
+}
+
 # Security Group
 resource "aws_security_group" "flask-terraform-sg" {
     name = "terraform-example-instance"
