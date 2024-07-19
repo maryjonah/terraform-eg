@@ -34,7 +34,7 @@ variable "outbound_anywhere" {
 
 # Security Group
 resource "aws_security_group" "flask-terraform-sg" {
-    name = "terraform-example-instance-1"
+    name = "terraform-example-instance-7"
 
     ingress {
         description = "Flask"
