@@ -78,14 +78,6 @@ resource "aws_instance" "flask" {
     ami = "ami-076fe60835f136dc9"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
-
-    user_data = <<-EOF
-    #!/bin/bash
-    DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-    EOF
-
-    user_data_replace_on_change = true
-
     tags = {
         Name = "Example"
     }
