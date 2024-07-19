@@ -34,7 +34,7 @@ variable "outbound_anywhere" {
 
 # Security Group
 resource "aws_security_group" "flask-terraform-sg" {
-    name = "terraform-example-instance-4"
+    name = "terraform-example-instance"
 
     ingress {
         description = "Flask"
@@ -82,7 +82,7 @@ resource "aws_instance" "flask" {
     user_data = <<-EOF
     #!/bin/bash
     DD_API_KEY=${var.datadog_api_key} DD_SITE="datadoghq.eu"  bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-    DD_SERVICE="traces-flask-request-app" DD_ENV="staging-1" DD_LOGS_INJECTION=true ddtrace-run python my_app.py
+    DD_SERVICE="traces-flask-request-app" DD_ENV="staging-1" DD_LOGS_INJECTION=true ddtrace-run python app.py
     EOF
 
     user_data_replace_on_change = true
